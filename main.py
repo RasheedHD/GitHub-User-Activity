@@ -17,11 +17,22 @@ def fetch_user_activity():
             if event["type"] == "PushEvent":
                 print(f"- Pushed to {event["repo"]["name"]}")
             elif event["type"] == "CreateEvent":
-                print(f"- Created repository {event["repo"]["name"]}")
+                if event["payload"]["ref_type"] == "repository":
+                    print(f"- Created repository {event["repo"]["name"]}")
+                elif event["payload"]["ref_type"] == "tag":
+                    print(f"- Created tag in {event["repo"]["name"]}")
+                elif event["payload"]["ref_type"] == "branch":
+                    print(f"- Created branch in {event["repo"]["name"]}")
             elif event["type"] == "WatchEvent":
                 print(f"- Starred {event["repo"]["name"]}")
             elif event["type"] == "IssuesEvent":
-                print(f"- Opened a new issue in {event["repo"]["name"]}")
+                if event["payload"]["action"] == "opened":
+                    print(f"- Opened a new issue in {event["repo"]["name"]}")
+                elif event["payload"]["action"] == "reopened":
+                    print(f"- Reopened an issue in {event["repo"]["name"]}")
+                elif event["payload"]["action"] == "closed":
+                    print(f"- Closed an issue in {event["repo"]["name"]}")
+
     except HTTPError:
         print(f"User {user} does not exist!")
     except URLError:
