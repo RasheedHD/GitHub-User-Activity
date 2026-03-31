@@ -1,8 +1,8 @@
 import urllib.request
 import json
 
-#user = input("> ")
-url = f"https://api.github.com/users/{"RasheedHD"}/events"
+user = input("> ")
+url = f"https://api.github.com/users/{user}/events"
 
 def fetch_user_activity():
     resp = urllib.request.urlopen(url)
