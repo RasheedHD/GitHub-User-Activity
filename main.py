@@ -2,7 +2,7 @@ import urllib.request
 import json
 
 
-user = input("> ")
+user = input("> ") # Takes username from input
 url = f"https://api.github.com/users/{user}/events"
 
 
