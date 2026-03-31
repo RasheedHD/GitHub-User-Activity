@@ -9,7 +9,6 @@ def fetch_user_activity():
     data = resp.read()
     decodedData = data.decode("UTF-8")
     pythonList = json.loads(decodedData)
-    #print(pythonList)
     for event in pythonList:
         if event["type"] == "PushEvent":
             print(f"- Pushed 1 commit to {event["repo"]["name"]}")
